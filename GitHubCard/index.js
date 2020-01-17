@@ -43,7 +43,7 @@ const followersArray = [];
 </div>
 */
 function createGithubCard(obj) {
-  // create elements
+  // Create Components
   const card = document.createElement("div"),
     cardImg = document.createElement("img"),
     cardInfo = document.createElement("div"),
@@ -56,7 +56,7 @@ function createGithubCard(obj) {
     cardFollowing = document.createElement("p"),
     cardBio = document.createElement("p");
 
-  // nest elements
+  // Appended element
   card.append(cardImg);
   card.append(cardInfo);
   cardInfo.append(cardName);
@@ -75,7 +75,7 @@ function createGithubCard(obj) {
   cardName.classList.add("name");
   cardUserName.classList.add("username");
 
-  // pass userd data to card
+  //follower's data transmited to card
   cardImg.src = obj.avatar_url;
   cardName.textContent = obj.name;
   cardUserName.textContent = obj.login;
@@ -91,7 +91,7 @@ function createGithubCard(obj) {
   return card;
 }
 
-// select .card element
+//  parent element
 const cards = document.querySelector(".cards");
 
 // create new card with my data
@@ -109,12 +109,12 @@ axios
 axios
   .get("https://api.github.com/users/dr3apap/followers")
   .then(response => {
-    // console.log(response);
+    // console.log('The data was not returned', response);
     response.data.forEach(follower => {
       axios
         .get(follower.url)
         .then(res => {
-          // console.log(followerResponse);
+          // console.log('The data was not returned', res);
           cards.append(createGithubCard(res.data));
         })
         .catch(followerError => {
